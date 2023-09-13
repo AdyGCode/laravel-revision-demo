@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <h1 class="text-teal-700 text-2xl">
         {{ __('Statuses') }}
     </h1>

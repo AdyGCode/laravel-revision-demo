@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::get('/', [StaticPageController::class, 'home'])
     ->name('static.home');
 Route::get('/privacy', [StaticPageController::class, 'privacy'])
     ->name('static.privacy');
 Route::get('/contact', [StaticPageController::class, 'contact'])
     ->name('static.contact');
+
+Route::get('/welcome', [StaticPageController::class, 'welcome'])
+    ->name('static.welcome');
+
 
 // Statuses Routes
 //Route::get('/statuses', [StatusController::class, 'index'])->name('statuses.index');
@@ -42,9 +42,11 @@ Route::get('/contact', [StaticPageController::class, 'contact'])
 // Route::resource('statuses', StatusController::class);
 // Route::get('/statuses/{status}/delete', [StatusController::class, 'delete'])->name('statuses.delete');
 
-Route::resource('statuses', StatusController::class)->only(['index','show']);
-Route::resource('statuses', StatusController::class)->middleware(['auth'])->except(['index','show']);
-Route::get('/statuses/{status}/delete', [StatusController::class, 'delete'])->name('statuses.delete');
+Route::resource('statuses', StatusController::class)->only(['index', 'show']);
+Route::middleware('auth')->group(function () {
+    Route::resource('statuses', StatusController::class)->except(['index', 'show']);
+    Route::get('/statuses/{status}/delete', [StatusController::class, 'delete'])->name('statuses.delete');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

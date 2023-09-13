@@ -12,7 +12,8 @@ class UpdateStatusRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // return true; // setting true allows ANYONE to save new statuses
+        return !is_null(auth()->user());  // only allow authenticated users
     }
 
     /**

@@ -14,8 +14,9 @@ class StatusController extends Controller
      */
     public function index(): View
     {
+
         $statuses = Status::paginate(3); // 3 = 3 items per page
-        return view('statuses.index', compact(['statuses',]));
+        return view('statuses.index', compact(['statuses']));
     }
 
     /**

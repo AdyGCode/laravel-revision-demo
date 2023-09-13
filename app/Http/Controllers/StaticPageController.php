@@ -23,4 +23,9 @@ class StaticPageController extends Controller
         return view('static.contact');
     }
 
+    public function welcome(): View
+    {
+        return view('static.welcome');
+    }
+
 }
