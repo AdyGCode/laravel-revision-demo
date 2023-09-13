@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
 <div class="flex flex-col gap-4">
     <h1 class="text-teal-700 text-2xl">
         Welcome to {{ env('APP_NAME') }} - Contact Us
@@ -23,4 +23,4 @@
             </a></li>
     </ul>
 </div>
-</x-guest-layout>
+</x-app-layout>

@@ -51,6 +51,25 @@ class StatusController extends Controller
      */
     public function edit(Status $status)
     {
+        //NB: This code will not function for the Statuses
+        //    as the table DOES NOT contain a user_id.
+        //    -----
+        //    It is an example of how to stop a logged in user
+        //    from editing something that they have NOT created.
+        //
+        //    For example, editing a word's definition that they did not
+        //    create.
+        //    -----
+        //    There will be an update to this in that admin users would
+        //    be allowed to do so, but this will be looked at with
+        //    Roles & Permissions in a different session.
+
+        // Comment Code Out (for statuses)
+        if ($status->user_id !== auth()->user()->id) {
+            return redirect(route('statuses.index'))
+                ->with('messages', ["This is not your status"]);
+        }
+        // End Comment Code Out
         return view('statuses.update', compact(['status',]));
     }
 
@@ -59,6 +78,7 @@ class StatusController extends Controller
      */
     public function update(UpdateStatusRequest $request, Status $status)
     {
+
         $validated = $request->validated();
         $status->update($validated);
         return redirect(route('statuses.index'))
